@@ -124,7 +124,7 @@ trigger that forces a stuck report over a third attempt.)
   Deploy/live-write: no. Spec: §16/§18, §10.2/§13.4.
 
 **Day 1 — Inbox quality / deterministic-scoring calibration** · PA-backend → Lead ·
-`wip` (design unblocked by Owner; Lead-PASS-before-deploy gated on B1/B4)
+`done` (design unblocked by Owner; Lead-PASS-before-deploy gated on B1/B4)
 - Why: 1/5 cards shortlist-worthy; quality is the blocker, not ingestion.
 - Gate: if weak cards trace to a tunable deterministic cause → bounded scoring/lane
   patch, explainable reject reasons, no AI scorer.
@@ -132,7 +132,7 @@ trigger that forces a stuck report over a third attempt.)
   Lead PASS pre-deploy. Deploy: yes (Day 2). Live-write: via Day 2. Spec: §10.1/§10.6/§18.
 - Parallel: AI lane drafts helper contract (design-only).
 
-**Day 2 — Deploy calibration + Owner-gated live Sync proof** · Owner/PA/QA · `pending`
+**Day 2 — Deploy calibration + Owner-gated live Sync proof** · Owner/PA/QA · `wip`
 - Gate: if Owner authorizes the run → deploy Lead-approved patch, run Sync, reconcile
   CSV↔UI, compare before/after quality. If quality improves → continue; else scoring
   stays the blocker.
