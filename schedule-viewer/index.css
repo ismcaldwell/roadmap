@@ -7,6 +7,7 @@
   --accent-blue: #3B82F6;
   --accent-purple: #8B5CF6;
   --accent-green: #10B981;
+  --accent-yellow: #FACC15;
   --accent-orange: #F59E0B;
   --accent-red: #EF4444;
   --timeline-line: #334155;
@@ -145,6 +146,9 @@ body::after {
   z-index: 2;
   box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .timeline-item:hover .timeline-dot {
@@ -153,8 +157,19 @@ body::after {
 }
 
 /* Specific status dots */
-.timeline-item[data-status="done"] .timeline-dot { border-color: var(--accent-green); box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
-.timeline-item[data-status="done"]:hover .timeline-dot { background: var(--accent-green); }
+.timeline-item[data-status="pending"] .timeline-dot { border-color: var(--accent-yellow); box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
+.timeline-item[data-status="pending"]:hover .timeline-dot { background: rgba(250, 204, 21, 0.2); }
+
+.timeline-item[data-status="done"] .timeline-dot { 
+  background: var(--accent-green);
+  border-color: var(--accent-green); 
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); 
+}
+.timeline-item[data-status="done"] .timeline-dot::after {
+  content: '\2714';
+  color: #fff;
+  font-size: 0.85rem;
+}
 
 .timeline-item[data-status="blocked"] .timeline-dot { border-color: var(--accent-red); box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
 .timeline-item[data-status="blocked"]:hover .timeline-dot { background: var(--accent-red); }

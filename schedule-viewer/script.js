@@ -166,7 +166,7 @@ function renderTimeline(daysData) {
     item.style.transform = 'translateY(0)';
 
     const dot = document.createElement('div');
-    dot.className = 'timeline-dot';
+    dot.className = `timeline-dot dot-${day.status}`;
     item.appendChild(dot);
 
     const card = document.createElement('div');
