@@ -12,7 +12,7 @@ async function fetchRoadmap() {
     if (!response.ok) {
       // Fallback for static hosting (e.g. GitHub Pages)
       console.log("Local API unavailable, attempting to fetch static ROADMAP.md...");
-      response = await fetch('../ROADMAP.md');
+      response = await fetch('./ROADMAP.md');
       isStatic = true;
       if (!response.ok) {
         throw new Error(`Static fetch failed! status: ${response.status}`);

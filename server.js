@@ -10,7 +10,7 @@ app.use(express.static(__dirname));
 
 // Provide the roadmap data
 app.get('/api/roadmap', (req, res) => {
-  const roadmapPath = path.join(__dirname, '..', 'ROADMAP.md');
+  const roadmapPath = path.join(__dirname, 'ROADMAP.md');
   fs.readFile(roadmapPath, 'utf8', (err, data) => {
     if (err) return res.status(500).json({ error: 'Failed to read roadmap' });
     res.send(data);
@@ -21,7 +21,7 @@ app.post('/api/update-status', (req, res) => {
   const { dayTitle, oldStatus, newStatus } = req.body;
   if (!dayTitle || !newStatus) return res.status(400).json({ error: 'Invalid input' });
 
-  const roadmapPath = path.join(__dirname, '..', 'ROADMAP.md');
+  const roadmapPath = path.join(__dirname, 'ROADMAP.md');
   
   try {
     let data = fs.readFileSync(roadmapPath, 'utf8');

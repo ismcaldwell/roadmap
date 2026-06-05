@@ -124,7 +124,7 @@ trigger that forces a stuck report over a third attempt.)
   Deploy/live-write: no. Spec: §16/§18, §10.2/§13.4.
 
 **Day 1 — Inbox quality / deterministic-scoring calibration** · PA-backend → Lead ·
-`pending` (design unblocked by Owner; Lead-PASS-before-deploy gated on B1/B4)
+`wip` (design unblocked by Owner; Lead-PASS-before-deploy gated on B1/B4)
 - Why: 1/5 cards shortlist-worthy; quality is the blocker, not ingestion.
 - Gate: if weak cards trace to a tunable deterministic cause → bounded scoring/lane
   patch, explainable reject reasons, no AI scorer.
@@ -146,7 +146,7 @@ trigger that forces a stuck report over a third attempt.)
   Settings reachable; minimum controls only. Deploy: yes (frontend). Live-write: no.
   Spec: §8.3/§12, §8.8, §18.
 
-**Day 4 — Pre-Submit Checklist contract + modal** · PA + Antigravity → Lead · `pending`
+**Day 4 — Pre-Submit Checklist contract + modal** · PA + Antigravity → Lead · `wip`
 - Gate: if Lead resolves canonical submit-confirm route (B3) → build/verify; else
   `submitted` movement blocked.
 - Blocked-by: B3. Acceptance: no Submitted without confirm; off/warn/block correct;
