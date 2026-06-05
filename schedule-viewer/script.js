@@ -85,6 +85,7 @@ function parseAndRender(markdown) {
         dayData.rawStatus = statusMatch[1];
         
         if (rawStatus.includes('done') || rawStatus.includes('cleared')) dayData.status = 'done';
+        else if (rawStatus.includes('wip')) dayData.status = 'wip';
         else if (rawStatus.includes('blocked')) dayData.status = 'blocked';
         else if (rawStatus.includes('deferred')) dayData.status = 'deferred';
         else dayData.status = 'pending';
@@ -105,7 +106,7 @@ function parseAndRender(markdown) {
 }
 
 function cycleStatus(currentStatus) {
-  const statuses = ['pending', 'done', 'blocked', 'deferred'];
+  const statuses = ['pending', 'wip', 'done', 'blocked', 'deferred'];
   const idx = statuses.indexOf(currentStatus);
   return statuses[(idx + 1) % statuses.length];
 }
@@ -125,10 +126,27 @@ async function handleStatusClick(dayIndex) {
   
   day.status = newStatus;
   day.rawStatus = newStatus; // We will just write 'done', 'pending' etc to the file
+  
+  // Auto-progression logic
+  let nextDayToUpdate = null;
+  let nextDayOldRaw = null;
+  if (newStatus === 'done' && dayIndex + 1 < roadmapDataCache.length) {
+    const nextDay = roadmapDataCache[dayIndex + 1];
+    if (nextDay.status === 'pending') {
+      nextDayToUpdate = nextDay;
+      nextDayOldRaw = nextDay.rawStatus;
+      nextDay.status = 'wip';
+      nextDay.rawStatus = 'wip';
+    }
+  }
+
   renderTimeline(roadmapDataCache); // Re-render to show changes
   
   try {
-    const response = await fetch('/api/update-status', {
+    const promises = [];
+    
+    // Update the clicked item
+    promises.push(fetch('/api/update-status', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -136,16 +154,32 @@ async function handleStatusClick(dayIndex) {
         oldStatus: oldRaw,
         newStatus: newStatus
       })
-    });
+    }).then(res => { if (!res.ok) throw new Error('Server returned ' + res.status); }));
     
-    if (!response.ok) {
-      throw new Error('Server returned ' + response.status);
+    // Update the auto-progressed item if any
+    if (nextDayToUpdate) {
+      promises.push(fetch('/api/update-status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          dayTitle: `${nextDayToUpdate.dayNumber} — ${nextDayToUpdate.title}`,
+          oldStatus: nextDayOldRaw,
+          newStatus: 'wip'
+        })
+      }).then(res => { if (!res.ok) throw new Error('Server returned ' + res.status); }));
     }
+    
+    await Promise.all(promises);
+    
   } catch (err) {
     console.error("Failed to update status on server:", err);
     // Revert on error
     day.status = oldStatus;
     day.rawStatus = oldRaw;
+    if (nextDayToUpdate) {
+      nextDayToUpdate.status = 'pending';
+      nextDayToUpdate.rawStatus = nextDayOldRaw;
+    }
     renderTimeline(roadmapDataCache);
     alert("Failed to save status to ROADMAP.md");
   }

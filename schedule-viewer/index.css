@@ -157,8 +157,11 @@ body::after {
 }
 
 /* Specific status dots */
-.timeline-item[data-status="pending"] .timeline-dot { border-color: var(--accent-yellow); box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
-.timeline-item[data-status="pending"]:hover .timeline-dot { background: rgba(250, 204, 21, 0.2); }
+.timeline-item[data-status="pending"] .timeline-dot { border-color: var(--text-muted); box-shadow: 0 0 15px rgba(148, 163, 184, 0.2); }
+.timeline-item[data-status="pending"]:hover .timeline-dot { background: rgba(148, 163, 184, 0.2); }
+
+.timeline-item[data-status="wip"] .timeline-dot { border-color: var(--accent-yellow); box-shadow: 0 0 15px rgba(250, 204, 21, 0.4); }
+.timeline-item[data-status="wip"]:hover .timeline-dot { background: rgba(250, 204, 21, 0.2); }
 
 .timeline-item[data-status="done"] .timeline-dot { 
   background: var(--accent-green);
@@ -237,7 +240,8 @@ body::after {
   letter-spacing: 0.5px;
 }
 
-.badge-status-pending { background: rgba(59, 130, 246, 0.15); color: #60A5FA; border: 1px solid rgba(59, 130, 246, 0.3); }
+.badge-status-pending { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); border: 1px solid rgba(148, 163, 184, 0.3); }
+.badge-status-wip { background: rgba(250, 204, 21, 0.15); color: var(--accent-yellow); border: 1px solid rgba(250, 204, 21, 0.3); }
 .badge-status-done { background: rgba(16, 185, 129, 0.15); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.3); }
 .badge-status-blocked { background: rgba(239, 68, 68, 0.15); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.3); }
 .badge-status-deferred { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.3); }

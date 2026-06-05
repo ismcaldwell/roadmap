@@ -139,7 +139,7 @@ trigger that forces a stuck report over a third attempt.)
 - Blocked-by: Day 1; Owner live-write approval. Acceptance: UI = CSV; quality improves;
   insert/merge intact. Deploy: yes (backend). Live-write: **yes**. Spec: §9/§10.5/§15.1.
 
-**Day 3 — Manual import UI + Settings minimum path** · Antigravity → Lead · `blocked`
+**Day 3 — Manual import UI + Settings minimum path** · Antigravity → Lead · `pending`
 - Gate: import gives Sync-miss fallback; Settings unreachable → "tune without redeploy"
   underbuilt (route redirected, `App.jsx:25`).
 - Blocked-by: frontend-lane assignment. Acceptance: URL → pending → verify → pipeline;
