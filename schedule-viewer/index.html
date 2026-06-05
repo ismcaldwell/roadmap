@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVP Roadmap Schedule</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-glow"></div>
+      <h1>Project Roadmap</h1>
+      <p class="subtitle">Live Execution Schedule</p>
+    </header>
+
+    <main class="timeline-container" id="timeline-container">
+      <div class="loader" id="loader">Loading Roadmap Data...</div>
+      <!-- Timeline items will be injected here -->
+    </main>
+  </div>
+
+  <!-- Error Modal for local file access issues -->
+  <div class="error-overlay" id="error-overlay" style="display: none;">
+    <div class="error-modal">
+      <h2>⚠️ Local File Access Error</h2>
+      <p>Your browser is blocking access to `ROADMAP.md` due to CORS policies for local files.</p>
+      <p>To view this schedule, please run a local development server in your terminal:</p>
+      <code>python3 -m http.server 8000</code>
+      <p>Then navigate to <a href="http://localhost:8000/schedule-viewer/">http://localhost:8000/schedule-viewer/</a></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
